@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jakarta Drive — Rental Mobil Jakarta</title>
+  <meta name="description" content="Rental mobil Jakarta harian, mingguan dan bulanan. Pilih armada, cek harga, lalu booking langsung melalui WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#111315;
+      --muted:#6f7479;
+      --paper:#f6f4ef;
+      --card:#ffffff;
+      --line:#e7e3da;
+      --gold:#d5ad5b;
+      --gold2:#f1d48c;
+      --green:#22c55e;
+      --dark:#0b0d0f;
+      --radius:24px;
+      --shadow:0 20px 60px rgba(14,17,20,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--paper);color:var(--ink)}
+    a{text-decoration:none;color:inherit}
+    button,input,select{font:inherit}
+    .wrap{width:min(1180px,calc(100% - 36px));margin:auto}
+
+    .topbar{background:#080a0c;color:#cbd0d5;font-size:13px}
+    .topbar .wrap{height:38px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+    .topbar .left,.topbar .right{display:flex;gap:18px;align-items:center}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:7px}
+
+    header{position:sticky;top:0;z-index:40;background:rgba(246,244,239,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(17,19,21,.06)}
+    nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.5px}
+    .brandmark{width:42px;height:42px;border-radius:14px;background:var(--dark);color:#fff;display:grid;place-items:center;position:relative;overflow:hidden}
+    .brandmark:after{content:"";width:34px;height:8px;border:2px solid var(--gold);border-left:none;border-right:none;transform:rotate(-18deg);position:absolute}
+    .brand b{font-size:19px}.brand small{font-size:10px;color:var(--muted);display:block;letter-spacing:1.8px;margin-top:1px}
+    .navlinks{display:flex;gap:28px;font-size:14px;font-weight:700;color:#3c4146}
+    .navlinks a:hover{color:#000}
+    .wa-mini{background:#111315;color:#fff;padding:12px 17px;border-radius:999px;font-size:13px;font-weight:800;display:flex;align-items:center;gap:8px}
+    .wa-icon{width:22px;height:22px;border-radius:50%;background:#25d366;display:grid;place-items:center;color:white;font-size:10px;font-weight:900}
+    .hamb{display:none;background:none;border:0;font-size:25px}
+
+    .hero{min-height:720px;position:relative;display:flex;align-items:center;overflow:hidden;background:#0d1116}
+    .hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(4,7,10,.93) 0%,rgba(5,8,11,.78) 43%,rgba(5,8,11,.18) 78%),linear-gradient(0deg,rgba(4,7,10,.55),transparent 48%),url('https://images.pexels.com/photos/6698359/pexels-photo-6698359.jpeg?auto=compress&cs=tinysrgb&w=1800');background-size:cover;background-position:center 55%;transform:scale(1.015)}
+    .hero .wrap{position:relative;z-index:2;padding:78px 0 60px}
+    .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:56px}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:#f0e0ba;font-size:12px;letter-spacing:2.3px;font-weight:800;text-transform:uppercase}
+    .eyebrow:before{content:"";width:34px;height:1px;background:var(--gold)}
+    h1{font-family:"Playfair Display",serif;color:#fff;font-size:clamp(50px,6vw,82px);line-height:.99;margin:22px 0 22px;letter-spacing:-2px;max-width:760px}
+    .hero-copy{color:#d8dde2;font-size:17px;line-height:1.75;max-width:650px}
+    .hero-actions{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+    .btn{border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 20px;border-radius:14px;font-weight:800;font-size:14px;transition:.2s transform,.2s opacity}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#151515}
+    .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.24)}
+    .trustline{display:flex;gap:22px;flex-wrap:wrap;margin-top:32px;color:#c8ced4;font-size:12px;font-weight:700}
+    .trustline span:before{content:"✓";color:#f0cf82;margin-right:7px}
+
+    .booking{background:rgba(255,255,255,.96);padding:26px;border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.27);max-width:430px;justify-self:end}
+    .booking h3{margin:0 0 5px;font-size:22px;letter-spacing:-.6px}.booking p{margin:0 0 20px;color:var(--muted);font-size:13px;line-height:1.5}
+    .fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{font-size:11px;font-weight:800;color:#747980;text-transform:uppercase;letter-spacing:.8px;display:block;margin:0 0 7px}
+    .field.full{grid-column:1/-1}
+    select,input{width:100%;border:1px solid #dedbd4;background:#faf9f6;border-radius:12px;padding:13px 12px;outline:none;color:#222}
+    select:focus,input:focus{border-color:#b9944d;box-shadow:0 0 0 3px rgba(213,173,91,.16)}
+    .booking .btn{width:100%;margin-top:14px;background:#151719;color:#fff}
+    .smallnote{font-size:10px!important;color:#979b9f!important;margin:10px 0 0!important;text-align:center}
+
+    .stats{margin-top:-32px;position:relative;z-index:6}.statsbox{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:19px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .stat{text-align:center;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat b{display:block;font-size:22px}.stat small{color:var(--muted);font-weight:600}
+
+    section{padding:92px 0}.headrow{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:34px}.section-kicker{font-size:11px;text-transform:uppercase;letter-spacing:2.1px;font-weight:800;color:#aa8241}.section-title{font-size:clamp(32px,4vw,48px);line-height:1.1;margin:8px 0 0;letter-spacing:-1.6px;max-width:690px}.section-desc{max-width:470px;color:var(--muted);line-height:1.7;font-size:14px}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 28px}.filter{padding:10px 15px;border-radius:999px;border:1px solid #ddd8cf;background:transparent;cursor:pointer;font-weight:800;font-size:12px;color:#5c6166}.filter.active{background:#151719;color:#fff;border-color:#151719}
+
+    .fleet{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.car{background:var(--card);border-radius:22px;overflow:hidden;border:1px solid #ece7de;box-shadow:0 10px 35px rgba(30,30,30,.055);transition:.25s transform,.25s box-shadow}.car:hover{transform:translateY(-5px);box-shadow:0 24px 55px rgba(24,24,24,.11)}
+    .car-img{height:235px;background:linear-gradient(180deg,#f6f5f2,#eceae5);display:grid;place-items:center;padding:18px;position:relative;overflow:hidden}.car-img:after{content:"";position:absolute;width:72%;height:18px;border-radius:50%;background:rgba(0,0,0,.12);filter:blur(9px);bottom:31px}.car-img img{max-width:95%;max-height:198px;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 22px 16px rgba(0,0,0,.12))}
+    .badge{position:absolute;left:15px;top:15px;z-index:4;background:#fff;border:1px solid #e7e2d9;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:800}.badge.ready:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px}
+    .car-body{padding:20px}.car-top{display:flex;justify-content:space-between;gap:15px}.car h3{margin:0;font-size:20px;letter-spacing:-.5px}.category{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:#a27b3f;font-weight:800;margin-bottom:5px}.specs{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0;color:#74797e;font-size:11px;font-weight:700}.specs span{padding-right:12px;border-right:1px solid #e4e0da}.specs span:last-child{border:0}
+    .pricebox{border-top:1px solid #eee9e1;padding-top:16px;display:flex;align-items:end;justify-content:space-between;gap:12px}.price small{color:#8a8f94;display:block;font-size:10px}.price b{font-size:20px;letter-spacing:-.5px}.price em{font-style:normal;font-size:11px;color:#8a8f94}.wa-btn{background:#e9f9ef;color:#17803c;border:0;border-radius:11px;padding:11px 13px;font-size:11px;font-weight:900;cursor:pointer}
+    .demo-label{display:inline-flex;gap:7px;align-items:center;font-size:10px;color:#898d91;margin-top:8px}
+
+    .why{background:#111315;color:#fff}.why .section-desc{color:#afb5bb}.why .section-kicker{color:#efcf83}.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px}.benefit{background:#181b1e;border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:25px}.benefit .ico{width:44px;height:44px;border-radius:13px;background:rgba(213,173,91,.15);color:#efcf83;display:grid;place-items:center;font-size:20px}.benefit h3{font-size:16px;margin:18px 0 9px}.benefit p{color:#adb3b8;font-size:12px;line-height:1.7;margin:0}
+
+    .tracking-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}.tracking-copy ul{padding:0;margin:25px 0;list-style:none}.tracking-copy li{padding:10px 0;border-bottom:1px solid #e7e2d9;color:#5d6267;font-size:13px}.tracking-copy li b{color:#16191c}.tracking-copy li:before{content:"✓";margin-right:10px;color:#a87d36;font-weight:900}
+    .mapdemo{background:#dfe4e5;border-radius:26px;min-height:430px;position:relative;overflow:hidden;border:10px solid #fff;box-shadow:var(--shadow)}
+    .mapdemo:before{content:"";position:absolute;inset:-30px;background:linear-gradient(25deg,transparent 43%,rgba(255,255,255,.8) 44%,rgba(255,255,255,.8) 46%,transparent 47%),linear-gradient(115deg,transparent 46%,rgba(255,255,255,.85) 47%,rgba(255,255,255,.85) 49%,transparent 50%),repeating-linear-gradient(0deg,rgba(77,102,89,.08),rgba(77,102,89,.08) 2px,transparent 2px,transparent 60px),repeating-linear-gradient(90deg,rgba(77,102,89,.08),rgba(77,102,89,.08) 2px,transparent 2px,transparent 75px);transform:rotate(-6deg)}
+    .road{position:absolute;background:#f6f4ef;height:34px;width:120%;left:-10%;top:48%;transform:rotate(-13deg);box-shadow:0 0 0 1px rgba(0,0,0,.04)}.road.r2{top:25%;transform:rotate(36deg)}
+    .pin{position:absolute;background:#151719;color:#fff;border-radius:12px;padding:9px 11px;font-size:10px;font-weight:800;box-shadow:0 7px 20px rgba(0,0,0,.18)}.pin:after{content:"";position:absolute;left:18px;bottom:-6px;width:12px;height:12px;background:#151719;transform:rotate(45deg)}
+    .p1{left:17%;top:21%}.p2{right:13%;top:37%}.p3{left:42%;bottom:19%}.pin span{display:block;color:#cbd0d5;font-weight:600;margin-top:3px}.maptag{position:absolute;right:16px;bottom:16px;background:#fff;padding:12px 13px;border-radius:12px;font-size:10px;font-weight:800;box-shadow:0 8px 25px rgba(0,0,0,.12)}
+    .tech-note{background:#fff3d6;border:1px solid #ead29b;padding:12px 14px;border-radius:12px;color:#72531f;font-size:11px;line-height:1.55;margin-top:16px}
+
+    .services{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.service{min-height:240px;border-radius:22px;position:relative;overflow:hidden;padding:22px;display:flex;align-items:flex-end;color:#fff;background:#111}.service:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.88),rgba(0,0,0,.05)),var(--bg);background-size:cover;background-position:center}.service>*{position:relative;z-index:2}.service h3{font-size:18px;margin:0 0 7px}.service p{margin:0;color:#d2d6d8;font-size:11px;line-height:1.55}
+    .s1{--bg:url('https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=900')}.s2{--bg:url('https://images.pexels.com/photos/13861/IMG_3496bfree.jpg?auto=compress&cs=tinysrgb&w=900')}.s3{--bg:url('https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=900')}.s4{--bg:url('https://images.pexels.com/photos/169190/pexels-photo-169190.jpeg?auto=compress&cs=tinysrgb&w=900')}
+
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:35px}.step{background:#fff;border:1px solid #e8e3da;border-radius:20px;padding:26px}.num{font-family:"Playfair Display",serif;font-size:38px;color:#d2aa59}.step h3{margin:10px 0 8px}.step p{font-size:12px;color:#74797e;line-height:1.7;margin:0}
+    .faq{max-width:850px;margin:auto}.faq-item{border-bottom:1px solid #ded9d0}.faq-q{width:100%;text-align:left;background:none;border:0;padding:20px 0;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;gap:20px}.faq-a{display:none;padding:0 0 20px;color:#70757a;font-size:13px;line-height:1.7}.faq-item.open .faq-a{display:block}.faq-item.open .plus{transform:rotate(45deg)}.plus{font-size:20px;transition:.2s}
+
+    .cta{padding:0 0 92px}.ctabox{background:#111315;color:#fff;border-radius:28px;padding:55px;display:flex;justify-content:space-between;gap:30px;align-items:center;position:relative;overflow:hidden}.ctabox:after{content:"";position:absolute;width:330px;height:330px;border-radius:50%;border:70px solid rgba(213,173,91,.12);right:-80px;top:-140px}.ctabox h2{font-size:36px;letter-spacing:-1.3px;margin:0 0 10px}.ctabox p{color:#bcc1c6;margin:0;max-width:650px;font-size:13px;line-height:1.7}.ctabox .btn{position:relative;z-index:2;white-space:nowrap}
+
+    footer{background:#090b0d;color:#9ea4aa;padding:45px 0 30px}.footergrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}.footer-title{color:#fff;font-weight:800;margin-bottom:13px}.footergrid p,.footergrid a{font-size:12px;line-height:1.8;display:block}.footergrid a:hover{color:#fff}.legal{margin-top:35px;padding-top:22px;border-top:1px solid #1f2326;font-size:10px;display:flex;justify-content:space-between;gap:20px}
+    .floating-wa{position:fixed;right:20px;bottom:20px;background:#25d366;color:#fff;border-radius:999px;padding:13px 17px;z-index:50;box-shadow:0 14px 35px rgba(20,120,65,.28);font-weight:900;font-size:12px;display:flex;align-items:center;gap:8px}
+
+    @media(max-width:980px){
+      .navlinks{display:none}.hamb{display:block}.hero-grid,.tracking-grid{grid-template-columns:1fr}.booking{justify-self:start;max-width:650px;width:100%}.hero{min-height:auto}.fleet{grid-template-columns:repeat(2,1fr)}.benefits,.services{grid-template-columns:repeat(2,1fr)}.footergrid{grid-template-columns:1fr 1fr}.headrow{align-items:start;flex-direction:column}.statsbox{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.hero:before{background-image:linear-gradient(90deg,rgba(4,7,10,.93),rgba(5,8,11,.62)),url('https://images.pexels.com/photos/6698359/pexels-photo-6698359.jpeg?auto=compress&cs=tinysrgb&w=1800')}
+    }
+    @media(max-width:640px){
+      .topbar .right{display:none}.topbar .left{gap:8px}.wrap{width:min(100% - 24px,1180px)}nav{height:68px}.wa-mini{display:none}.hero .wrap{padding-top:60px}.hero-grid{gap:30px}h1{font-size:49px}.hero-copy{font-size:14px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.stats{margin-top:-15px}.statsbox{padding:15px}.stat{padding:7px}.stat b{font-size:18px}.stat small{font-size:10px}.fleet,.benefits,.services,.steps{grid-template-columns:1fr}.car-img{height:220px}section{padding:70px 0}.ctabox{padding:36px 24px;align-items:flex-start;flex-direction:column}.ctabox h2{font-size:30px}.footergrid{grid-template-columns:1fr}.legal{flex-direction:column}.floating-wa{right:12px;bottom:12px}.mapdemo{min-height:350px}.section-title{font-size:35px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="left"><span><i class="dot"></i>Booking 24/7</span><span>Area Jakarta & Jabodetabek</span></div>
+      <div class="right"><span>Airport Transfer</span><span>Corporate Rental</span><span>Driver Profesional</span></div>
+    </div>
+  </div>
+
+  <header>
+    <nav class="wrap">
+      <a class="brand" href="#home"><span class="brandmark">JD</span><span><b>Jakarta Drive</b><small>PREMIUM CAR RENTAL</small></span></a>
+      <div class="navlinks">
+        <a href="#armada">Armada</a><a href="#layanan">Layanan</a><a href="#tracking">Smart Tracking</a><a href="#cara">Cara Sewa</a><a href="#faq">FAQ</a>
+      </div>
+      <a class="wa-mini" href="https://wa.me/6281234567890?text=Halo%20Jakarta%20Drive,%20saya%20ingin%20bertanya%20tentang%20rental%20mobil." target="_blank"><span class="wa-icon">WA</span> Chat Admin</a>
+      <button class="hamb" aria-label="Menu">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Move Jakarta Better</span>
+            <h1>Sewa mobil Jakarta, nyaman dari pintu ke tujuan.</h1>
+            <p class="hero-copy">Pilih city car, family car, SUV premium hingga kendaraan grup. Harga transparan, armada terawat, dan booking langsung terhubung ke WhatsApp admin.</p>
+            <div class="hero-actions"><a href="#armada" class="btn btn-gold">Lihat Armada ↓</a><a href="https://wa.me/6281234567890?text=Halo%20Jakarta%20Drive,%20saya%20ingin%20cek%20ketersediaan%20mobil." target="_blank" class="btn btn-ghost"><span class="wa-icon">WA</span> Tanya Ketersediaan</a></div>
+            <div class="trustline"><span>Harga transparan</span><span>Unit terawat</span><span>Driver berpengalaman</span></div>
+          </div>
+          <div class="booking">
+            <h3>Cari mobil untuk perjalananmu</h3>
+            <p>Isi kebutuhan singkat. Tombol di bawah akan membuka WhatsApp dengan pesan yang sudah terisi otomatis.</p>
+            <div class="fields">
+              <div class="field full"><label>Mobil</label><select id="bookCar"><option>Honda Brio</option><option>Toyota Avanza</option><option>Innova Zenix</option><option>Toyota Fortuner</option><option>Alphard Transformer</option><option>Hiace Premio</option></select></div>
+              <div class="field"><label>Tanggal</label><input id="bookDate" type="date"></div>
+              <div class="field"><label>Durasi</label><select id="bookDuration"><option>1 Hari</option><option>2 Hari</option><option>3 Hari</option><option>1 Minggu</option><option>1 Bulan</option></select></div>
+              <div class="field"><label>Layanan</label><select id="bookService"><option>Lepas Kunci</option><option>Dengan Driver</option><option>Airport Transfer</option></select></div>
+              <div class="field"><label>Area Jemput</label><input id="bookArea" placeholder="Contoh: Sudirman"></div>
+            </div>
+            <button class="btn" onclick="bookingWhatsapp()"><span class="wa-icon">WA</span> Cek via WhatsApp</button>
+            <p class="smallnote">Nomor WhatsApp masih contoh dan dapat diganti dengan nomor admin rental.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats wrap"><div class="statsbox"><div class="stat"><b>30+</b><small>Pilihan unit</small></div><div class="stat"><b>24/7</b><small>Admin WhatsApp</small></div><div class="stat"><b>5 Area</b><small>DKI Jakarta</small></div><div class="stat"><b>Daily</b><small>Perawatan armada</small></div></div></div>
+
+    <section id="armada">
+      <div class="wrap">
+        <div class="headrow"><div><div class="section-kicker">Pilihan Armada</div><h2 class="section-title">Pilih mobil sesuai gaya perjalanan.</h2></div><p class="section-desc">Harga di bawah adalah contoh untuk mockup. Saat website masuk produksi, harga, tahun kendaraan, layanan driver dan aturan sewa dapat diubah dari data rental yang sebenarnya.</p></div>
+        <div class="filters"><button class="filter active" data-filter="all">Semua</button><button class="filter" data-filter="city">City Car</button><button class="filter" data-filter="family">Family</button><button class="filter" data-filter="premium">Premium</button><button class="filter" data-filter="group">Group</button></div>
+        <div class="fleet">
+          <article class="car" data-cat="city">
+            <div class="car-img"><span class="badge ready">Tersedia</span><img alt="Honda Brio" src="https://jakarta-transport.com/wp-content/uploads/2019/05/images-removebg-preview.png"></div>
+            <div class="car-body"><div class="category">City Car</div><div class="car-top"><h3>Honda Brio</h3></div><div class="specs"><span>AT</span><span>4 Seat</span><span>Bensin</span></div><div class="pricebox"><div class="price"><small>Mulai dari</small><b>Rp375.000</b> <em>/ hari</em></div><button class="wa-btn" onclick="carWhatsapp('Honda Brio','Rp375.000 / hari')">WhatsApp →</button></div></div>
+          </article>
+          <article class="car" data-cat="family">
+            <div class="car-img"><span class="badge ready">Tersedia</span><img alt="Toyota Avanza" src="https://jakarta-transport.com/wp-content/uploads/2026/02/3-avanza-black-metallic-removebg-preview.png"></div>
+            <div class="car-body"><div class="category">Family Car</div><div class="car-top"><h3>Toyota Avanza</h3></div><div class="specs"><span>AT</span><span>7 Seat</span><span>Bensin</span></div><div class="pricebox"><div class="price"><small>Mulai dari</small><b>Rp425.000</b> <em>/ hari</em></div><button class="wa-btn" onclick="carWhatsapp('Toyota Avanza','Rp425.000 / hari')">WhatsApp →</button></div></div>
+          </article>
+          <article class="car" data-cat="family">
+            <div class="car-img"><span class="badge ready">Tersedia</span><img alt="Innova Zenix" src="https://jakarta-transport.com/wp-content/uploads/2026/02/Toyota-Kijang-Innova-Zenix-G-Hybrid-4-removebg-preview.png"></div>
+            <div class="car-body"><div class="category">Family Premium</div><div class="car-top"><h3>Innova Zenix</h3></div><div class="specs"><span>AT</span><span>7 Seat</span><span>Hybrid</span></div><div class="pricebox"><div class="price"><small>Mulai dari</small><b>Rp800.000</b> <em>/ hari</em></div><button class="wa-btn" onclick="carWhatsapp('Innova Zenix','Rp800.000 / hari')">WhatsApp →</button></div></div>
+          </article>
+          <article class="car" data-cat="premium">
+            <div class="car-img"><span class="badge ready">Tersedia</span><img alt="Toyota Fortuner" src="https://jakarta-transport.com/wp-content/uploads/2026/02/2gN923n0rj8BugZ1V6rTvWOL3NhC1GsqNiGIOivh-removebg-preview.png"></div>
+            <div class="car-body"><div class="category">Premium SUV</div><div class="car-top"><h3>Toyota Fortuner</h3></div><div class="specs"><span>AT</span><span>7 Seat</span><span>Diesel</span></div><div class="pricebox"><div class="price"><small>Mulai dari</small><b>Rp1.100.000</b> <em>/ hari</em></div><button class="wa-btn" onclick="carWhatsapp('Toyota Fortuner','Rp1.100.000 / hari')">WhatsApp →</button></div></div>
+          </article>
+          <article class="car" data-cat="premium">
+            <div class="car-img"><span class="badge ready">Dengan Driver</span><img alt="Alphard Transformer" src="https://jakarta-transport.com/wp-content/uploads/2026/02/Alphard-Transformer-Bandung-removebg-preview.png"></div>
+            <div class="car-body"><div class="category">Luxury MPV</div><div class="car-top"><h3>Alphard Transformer</h3></div><div class="specs"><span>AT</span><span>6 Seat</span><span>Driver</span></div><div class="pricebox"><div class="price"><small>Mulai dari</small><b>Rp3.000.000</b> <em>/ hari</em></div><button class="wa-btn" onclick="carWhatsapp('Alphard Transformer','Rp3.000.000 / hari + driver')">WhatsApp →</button></div></div>
+          </article>
+          <article class="car" data-cat="group">
+            <div class="car-img"><span class="badge ready">Dengan Driver</span><img alt="Hiace Premio" src="https://jakarta-transport.com/wp-content/uploads/2026/04/uW9Jx499hs82qMH7VL2g6qR4udYGepMLHZT7mxXv-removebg-preview.png"></div>
+            <div class="car-body"><div class="category">Group Transport</div><div class="car-top"><h3>Hiace Premio</h3></div><div class="specs"><span>MT</span><span>15 Seat</span><span>Driver</span></div><div class="pricebox"><div class="price"><small>Mulai dari</small><b>Rp1.650.000</b> <em>/ hari</em></div><button class="wa-btn" onclick="carWhatsapp('Hiace Premio','Rp1.650.000 / hari + driver')">WhatsApp →</button></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="why">
+      <div class="wrap">
+        <div class="headrow"><div><div class="section-kicker">Kenapa Jakarta Drive</div><h2 class="section-title">Rental yang dibuat untuk perjalanan tanpa ribet.</h2></div><p class="section-desc">Fokus desain website adalah membuat calon penyewa cepat memahami armada, harga dan cara booking—tanpa proses yang panjang.</p></div>
+        <div class="benefits">
+          <div class="benefit"><div class="ico">◆</div><h3>Harga terlihat sejak awal</h3><p>Customer tidak perlu bertanya hanya untuk mengetahui kisaran harga. Detail lebih lanjut diarahkan ke admin.</p></div>
+          <div class="benefit"><div class="ico">✓</div><h3>Unit terawat</h3><p>Tampilkan tahun kendaraan, transmisi, jumlah kursi, bahan bakar dan status ketersediaan pada setiap unit.</p></div>
+          <div class="benefit"><div class="ico">⌁</div><h3>Booking via WhatsApp</h3><p>Setiap mobil memiliki pesan WhatsApp otomatis dengan nama mobil dan harga yang dipilih customer.</p></div>
+          <div class="benefit"><div class="ico">24</div><h3>Respons cepat</h3><p>CTA WhatsApp selalu mudah ditemukan di desktop maupun smartphone, termasuk tombol mengambang.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tracking">
+      <div class="wrap tracking-grid">
+        <div class="tracking-copy">
+          <div class="section-kicker">Optional Technology</div><h2 class="section-title">Bisa menampilkan jarak mobil secara realtime.</h2>
+          <p class="section-desc" style="max-width:none">Teknologinya ada, tetapi membutuhkan GPS tracker/telematics yang dipasang di tiap kendaraan dan API dari penyedia tracking. Website kemudian dapat menghitung jarak unit terhadap titik customer.</p>
+          <ul>
+            <li><b>GPS tracker di kendaraan</b> mengirim latitude/longitude secara berkala.</li>
+            <li><b>API tracking</b> menghubungkan posisi unit ke website/admin dashboard.</li>
+            <li><b>Distance API</b> menghitung “unit sekitar 3,8 km” atau estimasi waktu sampai.</li>
+            <li><b>Privasi:</b> customer sebaiknya melihat jarak/ETA, bukan posisi presisi mobil 24 jam.</li>
+          </ul>
+          <div class="tech-note"><b>Rekomendasi:</b> versi awal website dibuat standar dulu. Setelah jumlah armada dan transaksi meningkat, fitur GPS dapat ditambahkan sebagai fase berikutnya tanpa perlu mendesain ulang website.</div>
+        </div>
+        <div class="mapdemo" aria-label="Contoh tampilan smart fleet tracking">
+          <div class="road"></div><div class="road r2"></div>
+          <div class="pin p1">Avanza #A02<span>DEMO • ±3,8 km</span></div>
+          <div class="pin p2">Fortuner #F01<span>DEMO • ±6,2 km</span></div>
+          <div class="pin p3">Brio #B04<span>DEMO • ±2,1 km</span></div>
+          <div class="maptag">SMART FLEET UI • DEMO ONLY</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="layanan" style="padding-top:20px">
+      <div class="wrap">
+        <div class="headrow"><div><div class="section-kicker">Layanan</div><h2 class="section-title">Satu armada untuk banyak kebutuhan.</h2></div><p class="section-desc">Bagian layanan membantu website menangkap pencarian selain “rental mobil Jakarta”, misalnya airport transfer, mobil wedding, dan kendaraan corporate.</p></div>
+        <div class="services"><div class="service s1"><div><h3>Lepas Kunci</h3><p>Untuk kebutuhan harian, mingguan atau bulanan dengan proses booking yang praktis.</p></div></div><div class="service s2"><div><h3>Dengan Driver</h3><p>Driver profesional untuk perjalanan bisnis, keluarga, tamu VIP dan agenda seharian.</p></div></div><div class="service s3"><div><h3>Airport Transfer</h3><p>Penjemputan atau pengantaran ke Soekarno-Hatta dan Halim dengan jadwal yang terencana.</p></div></div><div class="service s4"><div><h3>Wedding & Corporate</h3><p>Armada premium dan kendaraan grup untuk acara khusus atau kebutuhan perusahaan.</p></div></div></div>
+      </div>
+    </section>
+
+    <section id="cara">
+      <div class="wrap">
+        <div class="headrow"><div><div class="section-kicker">Cara Sewa</div><h2 class="section-title">Tiga langkah, langsung berangkat.</h2></div></div>
+        <div class="steps"><div class="step"><div class="num">01</div><h3>Pilih mobil</h3><p>Filter berdasarkan kategori, lihat harga dan spesifikasi singkat kendaraan.</p></div><div class="step"><div class="num">02</div><h3>Chat admin</h3><p>Klik WhatsApp. Pesan otomatis membawa informasi mobil yang sudah dipilih customer.</p></div><div class="step"><div class="num">03</div><h3>Konfirmasi & jalan</h3><p>Admin mengonfirmasi dokumen, jadwal, lokasi pengantaran, pembayaran dan serah-terima.</p></div></div>
+      </div>
+    </section>
+
+    <section id="faq" style="background:#efede7">
+      <div class="wrap faq">
+        <div style="text-align:center;margin-bottom:24px"><div class="section-kicker">FAQ</div><h2 class="section-title" style="margin-inline:auto">Pertanyaan yang sering ditanyakan.</h2></div>
+        <div class="faq-item open"><button class="faq-q">Apakah bisa rental lepas kunci? <span class="plus">+</span></button><div class="faq-a">Bisa. Pada website final, syarat dokumen, usia minimum, area penggunaan, deposit dan ketentuan lain dapat ditampilkan pada halaman khusus ketentuan sewa.</div></div>
+        <div class="faq-item"><button class="faq-q">Apakah harga sudah termasuk BBM dan tol? <span class="plus">+</span></button><div class="faq-a">Tergantung paket. Sebaiknya tiap layanan memiliki label yang jelas: termasuk driver/tidak, BBM, tol, parkir, overtime, serta area perjalanan.</div></div>
+        <div class="faq-item"><button class="faq-q">Bisa sewa untuk luar kota? <span class="plus">+</span></button><div class="faq-a">Bisa dibuat sebagai opsi saat booking. Admin dapat mengonfirmasi biaya tambahan dan batas area sesuai kebijakan rental.</div></div>
+        <div class="faq-item"><button class="faq-q">Bisakah website mengecek mobil tersedia atau sedang disewa? <span class="plus">+</span></button><div class="faq-a">Bisa. Tahap awal dapat memakai status manual dari dashboard/admin. Tahap lanjutan dapat memakai database booking agar status otomatis berubah sesuai tanggal sewa.</div></div>
+      </div>
+    </section>
+
+    <section class="cta"><div class="wrap"><div class="ctabox"><div><h2>Sudah tahu mobil yang dibutuhkan?</h2><p>Hubungi admin untuk mengecek ketersediaan, detail paket, kebutuhan driver, airport transfer atau rental bulanan.</p></div><a class="btn btn-gold" href="https://wa.me/6281234567890?text=Halo%20Jakarta%20Drive,%20saya%20ingin%20cek%20unit%20yang%20tersedia." target="_blank"><span class="wa-icon">WA</span> Chat WhatsApp</a></div></div></section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footergrid"><div><div class="brand" style="color:#fff"><span class="brandmark">JD</span><span><b>Jakarta Drive</b><small>PREMIUM CAR RENTAL</small></span></div><p style="max-width:360px;margin-top:18px">Contoh brand untuk website rental mobil Jakarta. Ganti nama, alamat, nomor WhatsApp, foto armada dan harga dengan data bisnis sebenarnya sebelum dipublikasikan.</p></div><div><div class="footer-title">Navigasi</div><a href="#armada">Armada</a><a href="#layanan">Layanan</a><a href="#tracking">Smart Tracking</a><a href="#faq">FAQ</a></div><div><div class="footer-title">Layanan</div><a href="#">Lepas Kunci</a><a href="#">Dengan Driver</a><a href="#">Airport Transfer</a><a href="#">Corporate</a></div><div><div class="footer-title">Kontak Contoh</div><p>Jakarta, Indonesia</p><p>+62 812-3456-7890</p><p>hello@jakartadrive.id</p></div></div>
+      <div class="legal"><span>© 2026 Jakarta Drive. Demo website.</span><span>Privacy • Terms • Rental Policy</span></div>
+    </div>
+  </footer>
+
+  <a class="floating-wa" href="https://wa.me/6281234567890?text=Halo%20Jakarta%20Drive,%20saya%20ingin%20rental%20mobil." target="_blank"><span class="wa-icon">WA</span> Chat Admin</a>
+
+  <script>
+    const ADMIN_WA='6281234567890'; // Ganti dengan nomor WhatsApp admin tanpa tanda +
+    function wa(text){window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(text)}`,'_blank')}
+    function carWhatsapp(car,price){wa(`Halo Jakarta Drive, saya tertarik menyewa ${car}. Harga yang saya lihat: ${price}. Mohon info ketersediaan, syarat sewa dan total biayanya.`)}
+    function bookingWhatsapp(){
+      const car=document.getElementById('bookCar').value;
+      const date=document.getElementById('bookDate').value || '-';
+      const duration=document.getElementById('bookDuration').value;
+      const service=document.getElementById('bookService').value;
+      const area=document.getElementById('bookArea').value || '-';
+      wa(`Halo Jakarta Drive, saya ingin cek ketersediaan.\n\nMobil: ${car}\nTanggal: ${date}\nDurasi: ${duration}\nLayanan: ${service}\nArea jemput: ${area}\n\nMohon info harga final dan unit yang tersedia.`)
+    }
+    document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+      const f=btn.dataset.filter;document.querySelectorAll('.car').forEach(c=>c.style.display=(f==='all'||c.dataset.cat===f)?'block':'none');
+    }));
+    document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
+    const d=new Date();d.setDate(d.getDate()+1);document.getElementById('bookDate').value=d.toISOString().split('T')[0];
+  </script>
+</body>
+</html>
